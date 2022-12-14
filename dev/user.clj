@@ -12,7 +12,7 @@
 
 (def defaults
   {:out-path "public"
-   :index index})
+   :paths [index "dev/jsxgraph/notebook*.clj"]})
 
 (defn start! []
   (swap! config/!resource->url
@@ -28,7 +28,7 @@
   (let [opts (merge defaults opts)
         cas-url (cv/store+get-cas-url!
                  (merge opts {:ext "js"})
-             (fs/read-all-bytes "public/js/main.js"))]
+                 (fs/read-all-bytes "public/js/main.js"))]
     (swap! config/!resource->url assoc "/js/viewer.js" cas-url)
     (clerk/build!
      opts)))
