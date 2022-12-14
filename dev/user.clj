@@ -11,7 +11,8 @@
   "dev/jsxgraph/notebook.clj")
 
 (def defaults
-  {:out-path "public"})
+  {:out-path "public"
+   :index index})
 
 (defn start! []
   (swap! config/!resource->url
@@ -24,14 +25,13 @@
   (clerk/show! index))
 
 (defn github-pages! [opts]
-  (let [{:keys [out-path]} (merge defaults opts)
-        cas (cv/store+get-cas-url!
-             {:out-path (str out-path "/js") :ext "js"}
+  (let [opts (merge defaults opts)
+        cas-url (cv/store+get-cas-url!
+                 (merge opts {:ext "js"})
              (fs/read-all-bytes "public/js/main.js"))]
-    (swap! config/!resource->url assoc "/js/viewer.js" (str "/js/" cas))
+    (swap! config/!resource->url assoc "/js/viewer.js" cas-url)
     (clerk/build!
-     (merge {:index "dev/jsxgraph/notebook.clj"}
-            (assoc opts :out-path out-path)))))
+     opts)))
 
 (defn garden! [opts]
   (println "Running npm install...")
