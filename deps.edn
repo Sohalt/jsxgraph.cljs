@@ -12,10 +12,10 @@
   {:extra-paths ["dev"]
    :extra-deps
    {io.github.nextjournal/clerk
-    {:git/sha "75f073c4899e37b2259cb2057cbf863b90892897"}
+    {:git/sha "770eb4e29fccd03c41cca262675fb251d66bb38c"}
     io.github.nextjournal/clerk.render
     {:git/url "https://github.com/nextjournal/clerk"
-     :git/sha "75f073c4899e37b2259cb2057cbf863b90892897"
+     :git/sha "770eb4e29fccd03c41cca262675fb251d66bb38c"
      :deps/root "render"}}
    :exec-fn user/garden!
    :nextjournal.clerk/aliases [:dev]}
